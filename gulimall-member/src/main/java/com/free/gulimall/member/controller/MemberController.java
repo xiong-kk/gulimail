@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.Map;
 
 
+import com.free.gulimall.member.feign.CouponFeignService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,7 @@ import com.free.gulimall.member.service.MemberService;
 import com.free.common.utils.PageUtils;
 import com.free.common.utils.R;
 
+import javax.annotation.Resource;
 
 
 /**
@@ -26,11 +29,23 @@ import com.free.common.utils.R;
  * @date 2022-09-30 16:36:04
  */
 @RestController
+
 @RequestMapping("member/member")
 public class MemberController {
     @Autowired
     private MemberService memberService;
 
+    @Autowired
+    CouponFeignService couponFeignService;
+
+    @RequestMapping("/coupons")
+    public R test(){
+        MemberEntity memberEntity = new MemberEntity();
+        memberEntity.setNickname("路");
+        R memberCoupons = couponFeignService.memberCoupons();
+        return R.ok().put("member",memberEntity).put("coupons",memberCoupons.get("coupons"));
+
+    }
     /**
      * 列表
      */
