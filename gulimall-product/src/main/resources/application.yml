@@ -9,13 +9,24 @@ spring:
       discovery:
         server-addr: 127.0.0.1:8848
 
+    alicloud:
+      access-key: LTAI5tMM4FJGx3ErYF2pmKth
+      secret-key: Y6RUAe4QBlJiIDEnGkU76NzsWABzrm
+      oss:
+        endpoint: oss-cn-hangzhou.aliyuncs.com
+
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   global-config:
     db-config:
       id-type: auto
+      logic-delete-value: 1
+      logic-not-delete-value: 0
 server:
   port: 10000
+logging:
+  level:
+    com.free.gulimall: debug
 
 
